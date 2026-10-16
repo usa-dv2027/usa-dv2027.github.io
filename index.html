@@ -4,6 +4,17 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>قرعة أمريكا DV-2027 | احنا ندفع الـ 1 دولار عنك</title>
+<meta name="description" content="سجّل بياناتك وسيب الباقي علينا. بندفع رسوم الـ 1 دولار ونقدّم طلبك على قرعة DV-2027. رقم طلب، إثبات تقديم، وضمان استرداد.">
+<meta name="theme-color" content="#0b1633">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ar_AR">
+<meta property="og:title" content="دولار واحد ممكن يفتحلك باب أمريكا. واحنا ندفعهولك.">
+<meta property="og:description" content="التقديم على قرعة DV-2027 بـ 250 جنيه: رقم طلب، إثبات تقديم، وضمان استرداد.">
+<meta property="og:url" content="https://usa-dv2027.github.io/">
+<meta property="og:image" content="https://usa-dv2027.github.io/preview.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <base target="_top">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800;900&display=swap">
 <style>
@@ -79,6 +90,27 @@ legend{font-weight:700;margin-bottom:8px}
 .note{font-size:14px;border-top:1px solid var(--line);padding-top:18px;margin-top:22px}
 .bar{position:sticky;bottom:0;background:var(--bg);border-top:1px solid var(--line);padding:10px 20px;text-align:center;z-index:5}
 .bar .btn{width:100%;max-width:520px}
+/* timeline */
+.tl{list-style:none;margin:0;padding:0;display:grid;gap:22px}
+.tl li{position:relative;padding-right:60px;min-height:46px}
+.tl i{position:absolute;right:0;top:0;width:44px;height:44px;border-radius:50%;background:var(--red);color:#fff;font:900 20px 'Cairo',sans-serif;font-style:normal;display:grid;place-items:center;z-index:1}
+.tl li:not(:last-child)::after{content:"";position:absolute;right:21px;top:44px;bottom:-22px;width:2px;background:var(--line)}
+.tl b{display:block;color:var(--ink);line-height:1.5}
+.tl span{color:var(--mute);font-size:15px;line-height:1.5}
+@media(min-width:760px){
+  .tl{grid-template-columns:repeat(4,1fr);gap:14px}
+  .tl li{padding:58px 6px 0;text-align:center}
+  .tl i{right:50%;transform:translateX(50%)}
+  .tl li:not(:last-child)::after{top:21px;bottom:auto;height:2px;width:calc(100% - 30px);right:calc(50% + 22px)}
+}
+/* refund */
+.refund{display:flex;gap:16px;align-items:flex-start;border:2px solid var(--ok);background:rgba(62,207,142,.08);border-radius:18px;padding:24px}
+.refund .ic{font-size:36px;line-height:1.2}
+.refund h2{margin:0 0 8px}
+.refund ul{margin:10px 0 0;padding:0;list-style:none}
+.refund li{position:relative;padding-right:26px;margin-bottom:6px;color:var(--mute);font-size:16px}
+.refund li::before{content:"✓";position:absolute;right:0;color:var(--ok);font-weight:900}
+.faq-wa{margin-top:12px;padding:10px 20px;font-size:16px}
 </style>
 </head>
 <body>
@@ -89,7 +121,7 @@ legend{font-weight:700;margin-bottom:8px}
     <h1>دولار واحد ممكن يفتحلك باب أمريكا. واحنا ندفعهولك.</h1>
     <p>قرعة الهجرة الأمريكية DV-2027 هتحتاج دفع 1 دولار إلكترونياً، ووسائل الدفع في مصر مش بتدفع بالدولار. سجّل بياناتك وسيب الباقي علينا.</p>
     <button class="btn go" type="button">سجّل بياناتك دلوقتي</button><br>
-    <span class="pill" id="cnt" hidden>✅ <b id="cn"></b> طلب اتسجل لحد دلوقتي</span>
+    <span class="pill">💬 بنرد على واتساب خلال ساعات</span> <span class="pill" id="cnt" hidden>✅ <b id="cn"></b> طلب اتسجل لحد دلوقتي</span>
   </div>
   <svg class="stamp" viewBox="0 0 240 240" role="img" aria-label="ختم DV-2027">
     <circle cx="120" cy="120" r="108" fill="none" stroke="#ef4b42" stroke-width="7"/>
@@ -115,10 +147,11 @@ legend{font-weight:700;margin-bottom:8px}
 
 <section>
   <h2>إزاي بتتم الخدمة؟</h2>
-  <ol class="steps">
-    <li><b>سجّل بياناتك</b>اسمك ورقم الواتساب ووسيلة الدفع. باقي البيانات هنطلبها منك على واتساب.</li>
-    <li><b>ادفع 250 جنيه</b>على فودافون كاش أو إنستا باي، وابعت صورة التحويل على واتساب.</li>
-    <li><b>احنا نقدّم</b>نراجع بياناتك وندفع الدولار ونبعتلك إثبات التقديم. بسبب الضغط، التقديم ممكن ياخد لحد يومين.</li>
+  <ol class="tl">
+    <li><i>1</i><b>سجّل بياناتك</b><span>دقيقة واحدة</span></li>
+    <li><i>2</i><b>حوّل 250 جنيه</b><span>وابعت صورة التحويل على واتساب</span></li>
+    <li><i>3</i><b>نراجع ونقدّم</b><span>لحد يومين بسبب الضغط</span></li>
+    <li><i>4</i><b>إثبات التقديم</b><span>بنبعتهولك أول ما التقديم يتم</span></li>
   </ol>
 </section>
 
@@ -129,6 +162,31 @@ legend{font-weight:700;margin-bottom:8px}
     <div class="box"><span class="ic">🔒</span><div><b>الدفع بعد التسجيل</b><p>طلبك بيتسجل الأول، وبعدين بتحوّل وبتبعتلنا صورة التحويل على واتساب.</p></div></div>
     <div class="box"><span class="ic">📄</span><div><b>إثبات التقديم</b><p>بعد ما نقدّم بنبعتلك إثبات إن طلبك اتقدّم فعلاً.</p></div></div>
     <div class="box"><span class="ic">🛡️</span><div><b>بياناتك للتقديم بس</b><p>بنستخدم بياناتك لتقديم طلبك وبس، ومبنشاركهاش مع أي حد.</p></div></div>
+  </div>
+</section>
+
+<section>
+  <h2>بياناتك محمية</h2>
+  <div class="trust">
+    <div class="box"><span class="ic">🪪</span><div><b>لتقديم طلبك بس</b><p>بنستخدم بيانات الباسبور لتقديم طلبك وبس.</p></div></div>
+    <div class="box"><span class="ic">🤐</span><div><b>مبنشاركهاش</b><p>مع أي حد، ولا بنستخدمها في أي غرض تاني.</p></div></div>
+    <div class="box"><span class="ic">🗑️</span><div><b>بنحذفها بعد التقديم</b><p>صور وبيانات الباسبور بتتمسح من عندنا بعد ما التقديم يخلص ونبعتلك إثباته. بنحتفظ بس باسمك ورقمك ورقم طلبك للمتابعة.</p></div></div>
+    <div class="box"><span class="ic">🚫</span><div><b>مبنطلبش حاجة حساسة</b><p>عمرنا ما هنطلب منك رقم كارت بنكي أو باسورد أي حساب.</p></div></div>
+  </div>
+</section>
+
+<section>
+  <div class="refund">
+    <span class="ic">💰</span>
+    <div>
+      <h2>ضمان استرداد فلوسك</h2>
+      <p>لو طلبك ما اتقدمش لأي سبب من عندنا، بنرجّع لك المبلغ كامل على نفس وسيلة الدفع اللي دفعت بيها.</p>
+      <ul>
+        <li>الاسترداد كامل من غير أي خصم.</li>
+        <li>لو في خطأ في بياناتك، بنكلمك على واتساب عشان يتصحح قبل التقديم.</li>
+        <li>بعد ما التقديم يتم ونبعتلك إثباته، الخدمة بتتحسب تمت.</li>
+      </ul>
+    </div>
   </div>
 </section>
 
@@ -170,6 +228,9 @@ legend{font-weight:700;margin-bottom:8px}
   <details><summary>هل التقديم بيضمن الفوز؟</summary><p>لأ. القرعة عشوائية ومحدش يقدر يضمن الفوز. اللي بنضمنه إن طلبك يتقدم صح وفي معاده.</p></details>
   <details><summary>إيه اللي هتطلبوه مني بعد التسجيل؟</summary><p>هنكلمك على واتساب ونطلب منك بيانات الباسبور والصورة المطلوبة للتقديم، وبنراجعهم معاك قبل ما نقدّم.</p></details>
   <details><summary>إزاي أتابع طلبي؟</summary><p>برقم طلبك على واتساب. أي استفسار ابعتلنا الرقم ونرد عليك.</p></details>
+<details><summary>لو فزت إيه اللي هيحصل؟</summary><p>نتيجة القرعة بتتعلن على الموقع الرسمي للبرنامج، وتقدر تتأكد منها ببيانات طلبك ورقم التأكيد اللي بنبعتهولك. ولو فزت، الخطوات اللي بعد كده بتكون مع الجهات الرسمية مباشرة، وتقدر تسألنا في أي سؤال.</p></details>
+  <details><summary>لو التقديم فشل؟</summary><p>لو حصلت أي مشكلة بنكلمك فوراً ونعيد المحاولة طالما الوقت لسه متاح. ولو ما قدرناش نقدّم لأي سبب من عندنا، بنرجّع فلوسك كاملة.</p></details>
+  <details><summary>إزاي أتواصل معاكم؟</summary><p>سجّل بياناتك الأول من الفورم عشان تاخد رقم طلب، وبعدها حوّل وابعت صورة التحويل مع رقم طلبك على واتساب. وأي استفسار بعد كده ابعتلنا رقم طلبك، وبنرد خلال ساعات.</p><button type="button" class="btn faq-wa go">سجّل بياناتك</button></details>
   <p class="note">الخدمة مستقلة وغير تابعة لأي جهة حكومية. القرعة بتعتمد على الاختيار العشوائي.</p>
 </section>
 </div>
