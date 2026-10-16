@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>قرعة أمريكا DV-2027 | احنا ندفع الـ 1 دولار عنك</title>
+<base target="_top">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800;900&display=swap">
+<style>
+:root{--bg:#0b1633;--card:#14244f;--line:#2a3d73;--ink:#f4f6ff;--mute:#aab6d9;--red:#ef4b42;--gold:#f6c04e;--ok:#3ecf8e}
+@media (prefers-color-scheme:light){:root{--bg:#f2f5ff;--card:#fff;--line:#d5dcf2;--ink:#0b1633;--mute:#4a5788;--gold:#b87a00;--ok:#0f9d63}}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Cairo',Tahoma,Arial,sans-serif;line-height:1.8;font-size:17px}
+.wrap{max-width:880px;margin:0 auto;padding:0 20px}
+section{padding:38px 0}
+h1{font-size:clamp(30px,7vw,52px);line-height:1.35;font-weight:900;margin:0 0 14px}
+h2{font-size:clamp(22px,4.5vw,30px);font-weight:800;margin:0 0 18px}
+p{margin:0 0 12px;color:var(--mute)}
+.hero{display:grid;gap:24px;align-items:center;padding-top:32px}
+@media(min-width:760px){.hero{grid-template-columns:1.4fr 1fr}}
+.stamp{justify-self:center;width:230px;max-width:70%;transform:rotate(-9deg);animation:slam .7s cubic-bezier(.2,1.4,.4,1) .3s both}
+@keyframes slam{0%{transform:rotate(-9deg) scale(2.4);opacity:0}55%{opacity:1}100%{transform:rotate(-9deg) scale(1);opacity:1}}
+@media(prefers-reduced-motion:reduce){.stamp{animation:none}.slide{transition:none!important}}
+.btn{display:inline-block;background:var(--red);color:#fff;font:800 18px 'Cairo',sans-serif;padding:14px 28px;border-radius:12px;border:0;cursor:pointer;text-decoration:none}
+.btn.ghost{background:transparent;color:var(--ink);border:2px solid var(--line)}
+.btn:disabled{opacity:.6}
+.btn:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.pill{display:inline-block;margin:14px 0 0;padding:6px 14px;border:1px solid var(--line);border-radius:99px;font-weight:700;color:var(--ink);font-size:15px}
+.two{display:grid;gap:16px}
+@media(min-width:760px){.two{grid-template-columns:1fr 1fr}}
+.box{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px}
+.box h3{margin:0 0 8px;font-size:20px}
+.bad h3{color:var(--red)}.good h3{color:var(--ok)}
+/* gallery */
+.gal{position:relative;aspect-ratio:16/9;max-height:460px;width:100%;border-radius:18px;overflow:hidden;border:1px solid var(--line);background:var(--card)}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity .9s;display:grid;place-items:center}
+.slide.on{opacity:1}
+.slide .em{font-size:90px;opacity:.5}
+.slide img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cap{position:absolute;inset:auto 0 0 0;padding:44px 20px 16px;background:linear-gradient(transparent,rgba(5,10,30,.85));color:#fff;font-weight:800;font-size:22px}
+.cap small{display:block;font-weight:600;font-size:14px;opacity:.85}
+.dots{display:flex;gap:8px;justify-content:center;margin-top:12px}
+.dots button{width:11px;height:11px;border-radius:50%;border:0;background:var(--line);padding:0;cursor:pointer}
+.dots button.on{background:var(--red);width:28px;border-radius:8px}
+.credit{font-size:12px;text-align:center;margin-top:6px}
+/* steps */
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:12px;counter-reset:s}
+.steps li{counter-increment:s;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 64px 16px 16px;position:relative;color:var(--mute)}
+.steps li::before{content:counter(s);position:absolute;right:16px;top:50%;transform:translateY(-50%);width:36px;height:36px;border-radius:50%;background:var(--red);color:#fff;font-weight:900;display:grid;place-items:center}
+.steps b{display:block;color:var(--ink)}
+/* trust */
+.trust{display:grid;gap:12px}
+@media(min-width:760px){.trust{grid-template-columns:1fr 1fr}}
+.trust .box{display:flex;gap:14px;align-items:flex-start}
+.trust .ic{font-size:28px;line-height:1.2}
+.trust b{display:block;color:var(--ink);margin-bottom:2px}
+.trust p{margin:0;font-size:15.5px}
+/* faq */
+details{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 18px;margin-bottom:10px}
+summary{cursor:pointer;font-weight:800;color:var(--ink)}
+details p{margin:10px 0 0}
+/* form */
+.price{text-align:center;border:2px dashed var(--gold);border-radius:18px;padding:18px;margin-bottom:14px}
+.price strong{display:block;font-size:52px;font-weight:900;color:var(--gold);line-height:1.2}
+.time{display:flex;gap:12px;align-items:flex-start;background:rgba(246,192,78,.12);border:1px solid var(--gold);border-radius:14px;padding:14px 16px;margin-bottom:16px;color:var(--ink);font-size:16px}
+.time span{font-size:24px;line-height:1.3}
+label{display:block;font-weight:700;margin-bottom:14px}
+input[type=text],input[type=tel]{width:100%;margin-top:6px;padding:13px 14px;border-radius:10px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);font:600 17px 'Cairo',sans-serif}
+fieldset{border:0;padding:0;margin:0 0 14px}
+legend{font-weight:700;margin-bottom:8px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.opt{margin:0;border:1.5px solid var(--line);border-radius:12px;padding:12px;text-align:center;cursor:pointer;font-weight:800}
+.opt:has(input:checked){border-color:var(--red);background:rgba(239,75,66,.12)}
+.opt input{position:absolute;opacity:0}
+.err{color:var(--red);min-height:26px;margin:0 0 8px;font-weight:700}
+.num{display:block;font-size:30px;font-weight:900;direction:ltr;text-align:center;color:var(--gold);margin:8px 0 12px;letter-spacing:1px}
+.row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.note{font-size:14px;border-top:1px solid var(--line);padding-top:18px;margin-top:22px}
+.bar{position:sticky;bottom:0;background:var(--bg);border-top:1px solid var(--line);padding:10px 20px;text-align:center;z-index:5}
+.bar .btn{width:100%;max-width:520px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<section class="hero">
+  <div>
+    <h1>دولار واحد ممكن يفتحلك باب أمريكا. واحنا ندفعهولك.</h1>
+    <p>قرعة الهجرة الأمريكية DV-2027 هتحتاج دفع 1 دولار إلكترونياً، ووسائل الدفع في مصر مش بتدفع بالدولار. سجّل بياناتك وسيب الباقي علينا.</p>
+    <button class="btn go" type="button">سجّل بياناتك دلوقتي</button><br>
+    <span class="pill" id="cnt" hidden>✅ <b id="cn"></b> طلب اتسجل لحد دلوقتي</span>
+  </div>
+  <svg class="stamp" viewBox="0 0 240 240" role="img" aria-label="ختم DV-2027">
+    <circle cx="120" cy="120" r="108" fill="none" stroke="#ef4b42" stroke-width="7"/>
+    <circle cx="120" cy="120" r="92" fill="none" stroke="#ef4b42" stroke-width="2.5"/>
+    <text x="120" y="112" text-anchor="middle" font-family="Cairo,Arial,sans-serif" font-weight="900" font-size="46" fill="#ef4b42">DV-2027</text>
+    <text x="120" y="152" text-anchor="middle" font-family="Cairo,Arial,sans-serif" font-weight="800" font-size="20" fill="#ef4b42">USA · $1</text>
+  </svg>
+</section>
+
+<section>
+  <h2>ممكن تكون دي وجهتك الجاية</h2>
+  <div class="gal" id="gal" aria-live="off"></div>
+  <div class="dots" id="dots"></div>
+  <p class="credit">صور الوجهات من Unsplash</p>
+</section>
+
+<section>
+  <div class="two">
+    <div class="box bad"><h3>المشكلة</h3><p>التقديم هيتطلب دفع 1 دولار أونلاين. كروت مصر العادية مش بتقبل الدفع بالدولار، وناس كتير بتضيع الفرصة بسبب دولار واحد.</p></div>
+    <div class="box good"><h3>الحل</h3><p>احنا بنراجع بياناتك، وندفع الرسوم بكارت دولار أمريكي، ونقدّم طلبك، ونتابع معاك لحد ما التقديم يخلص.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>إزاي بتتم الخدمة؟</h2>
+  <ol class="steps">
+    <li><b>سجّل بياناتك</b>اسمك ورقم الواتساب ووسيلة الدفع. باقي البيانات هنطلبها منك على واتساب.</li>
+    <li><b>ادفع 250 جنيه</b>على فودافون كاش أو إنستا باي، وابعت صورة التحويل على واتساب.</li>
+    <li><b>احنا نقدّم</b>نراجع بياناتك وندفع الدولار ونبعتلك إثبات التقديم. بسبب الضغط، التقديم ممكن ياخد لحد يومين.</li>
+  </ol>
+</section>
+
+<section>
+  <h2>ليه تطمّن معانا؟</h2>
+  <div class="trust">
+    <div class="box"><span class="ic">🧾</span><div><b>رقم طلب لكل عميل</b><p>أول ما تسجّل بتاخد رقم طلب (زي DV-0007) وبيه بتتابع معانا.</p></div></div>
+    <div class="box"><span class="ic">🔒</span><div><b>الدفع بعد التسجيل</b><p>طلبك بيتسجل الأول، وبعدين بتحوّل وبتبعتلنا صورة التحويل على واتساب.</p></div></div>
+    <div class="box"><span class="ic">📄</span><div><b>إثبات التقديم</b><p>بعد ما نقدّم بنبعتلك إثبات إن طلبك اتقدّم فعلاً.</p></div></div>
+    <div class="box"><span class="ic">🛡️</span><div><b>بياناتك للتقديم بس</b><p>بنستخدم بياناتك لتقديم طلبك وبس، ومبنشاركهاش مع أي حد.</p></div></div>
+  </div>
+</section>
+
+<section id="register">
+  <h2>سجّل طلبك</h2>
+  <div class="price"><p style="margin:0">تكلفة الخدمة للفرد، شاملة رسوم الدولار</p><strong>250 جنيه</strong></div>
+  <div class="time"><span>⏱</span><div>بسبب الضغط الكبير على الطلبات، تنفيذ التقديم ممكن ياخد <b>لحد يومين</b>. هنبعتلك إثبات التقديم أول ما يخلص.</div></div>
+
+  <form id="f" class="box" novalidate>
+    <label>الاسم بالكامل<input id="n" type="text" autocomplete="name" placeholder="زي ما هو في الباسبور"></label>
+    <label>رقم الواتساب<input id="p" type="tel" inputmode="numeric" autocomplete="tel" placeholder="01xxxxxxxxx"></label>
+    <fieldset>
+      <legend>هتدفع عن طريق إيه؟</legend>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="pay" value="فودافون كاش" checked>فودافون كاش</label>
+        <label class="opt"><input type="radio" name="pay" value="إنستا باي">إنستا باي</label>
+      </div>
+    </fieldset>
+    <p class="err" id="err" role="alert"></p>
+    <button class="btn" id="sb" type="submit" style="width:100%">أكّد طلبي</button>
+  </form>
+
+  <div id="ok" class="box" hidden>
+    <h3 style="color:var(--ok);margin:0 0 6px">✅ تم تسجيل طلبك</h3>
+    <p>رقم طلبك: <b id="oid" style="color:var(--ink)"></b> (احتفظ بيه)</p>
+    <p>الخطوة الأخيرة: حوّل <b style="color:var(--ink)">250 جنيه</b> على <b id="pm" style="color:var(--ink)"></b></p>
+    <span class="num" id="pn"></span>
+    <div class="row">
+      <button class="btn ghost" id="cp" type="button">نسخ الرقم</button>
+      <a class="btn" id="ip" target="_blank" rel="noopener" hidden>افتح إنستا باي وادفع</a>
+      <a class="btn" id="wa" target="_blank" rel="noopener">ابعت صورة التحويل على واتساب</a>
+    </div>
+    <p style="margin-top:16px">⏱ التقديم ممكن ياخد لحد يومين بسبب الضغط، وهنبعتلك إثبات التقديم على واتساب.</p>
+  </div>
+</section>
+
+<section>
+  <h2>أسئلة بتتكرر</h2>
+  <details><summary>هل التقديم بيضمن الفوز؟</summary><p>لأ. القرعة عشوائية ومحدش يقدر يضمن الفوز. اللي بنضمنه إن طلبك يتقدم صح وفي معاده.</p></details>
+  <details><summary>إيه اللي هتطلبوه مني بعد التسجيل؟</summary><p>هنكلمك على واتساب ونطلب منك بيانات الباسبور والصورة المطلوبة للتقديم، وبنراجعهم معاك قبل ما نقدّم.</p></details>
+  <details><summary>إزاي أتابع طلبي؟</summary><p>برقم طلبك على واتساب. أي استفسار ابعتلنا الرقم ونرد عليك.</p></details>
+  <p class="note">الخدمة مستقلة وغير تابعة لأي جهة حكومية. القرعة بتعتمد على الاختيار العشوائي.</p>
+</section>
+</div>
+<div class="bar"><button class="btn go" type="button">سجّل بياناتك دلوقتي</button></div>
+
+<script>
+var OWNER = '201098797348';
+var API = 'https://script.google.com/macros/s/AKfycbzg5RzvP7E4R6Aks0qlsRLB7NTQ0iOVS5t1Ym1jD0WkaG306nRE8L9nmh2ejirz5J7v/exec';
+var VODA = '01098797348';
+var INSTA = 'https://ipn.eg/S/mohammedrx/instapay/48tPjx';
+var $ = function(i){return document.getElementById(i)};
+var U = function(id){return 'https://unsplash.com/photos/'+id+'/download?force=true&w=1200'};
+
+var S = [
+  {src:U('3igovryaoVE'), t:'نيويورك', s:'مدينة ما بتنامش', e:'🗽', g:'linear-gradient(135deg,#1d3b8b,#0b1633)'},
+  {src:U('hlXT1cgI6xY'), t:'سان فرانسيسكو', s:'كاليفورنيا', e:'🌉', g:'linear-gradient(135deg,#b4381f,#3b1d5c)'},
+  {src:U('WoptMgN0eqY'), t:'جراند كانيون', s:'أريزونا', e:'🏜️', g:'linear-gradient(135deg,#c2662b,#4a1f1a)'},
+  {src:'', t:'رحلتك بتبدأ بتسجيل طلبك', s:'ادفع دولار واحد، واحنا بنقدم عنك', e:'✈️', g:'linear-gradient(135deg,#ef4b42,#7a1f3d)'}
+];
+var cur = 0, timer = null;
+(function(){
+  var gal = $('gal'), dots = $('dots');
+  S.forEach(function(x, i){
+    var d = document.createElement('div'); d.className = 'slide' + (i ? '' : ' on'); d.style.background = x.g;
+    var em = document.createElement('div'); em.className = 'em'; em.textContent = x.e; d.appendChild(em);
+    if (x.src) {
+      var im = new Image(); im.alt = x.t; im.loading = i ? 'lazy' : 'eager';
+      im.onerror = function(){ im.remove(); };
+      im.src = x.src; d.appendChild(im);
+    }
+    var c = document.createElement('div'); c.className = 'cap'; c.textContent = x.t;
+    var sm = document.createElement('small'); sm.textContent = x.s; c.appendChild(sm); d.appendChild(c);
+    gal.appendChild(d);
+    var b = document.createElement('button'); b.type = 'button'; b.setAttribute('aria-label', x.t);
+    if (!i) b.className = 'on';
+    b.onclick = function(){ show(i); restart(); };
+    dots.appendChild(b);
+  });
+})();
+function show(i){
+  var sl = document.querySelectorAll('.slide'), ds = document.querySelectorAll('#dots button');
+  sl[cur].classList.remove('on'); ds[cur].classList.remove('on');
+  cur = i; sl[cur].classList.add('on'); ds[cur].classList.add('on');
+}
+function restart(){
+  clearInterval(timer);
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  timer = setInterval(function(){ show((cur + 1) % S.length); }, 4500);
+}
+restart();
+
+document.querySelectorAll('.go').forEach(function(b){
+  b.onclick = function(){ $('register').scrollIntoView({behavior:'smooth'}); };
+});
+
+fetch(API + '?action=stats').then(function(r){ return r.json(); }).then(function(s){
+  if (s && s.count >= 10) { $('cn').textContent = s.count; $('cnt').hidden = false; }
+}).catch(function(){});
+
+$('f').onsubmit = function(e){
+  e.preventDefault();
+  var d = { name: $('n').value.trim(), phone: $('p').value.trim(),
+            pay: document.querySelector('input[name=pay]:checked').value };
+  $('err').textContent = '';
+  if (d.name.length < 3) { $('err').textContent = 'اكتب الاسم بالكامل'; return; }
+  $('sb').disabled = true; $('sb').textContent = 'جاري التسجيل...';
+  function fail(m){
+    $('err').textContent = m;
+    $('sb').disabled = false; $('sb').textContent = 'أكّد طلبي';
+  }
+  fetch(API, { method: 'POST', body: JSON.stringify(d) })
+    .then(function(r){ return r.json(); })
+    .then(function(r){
+      if (r.ok) { done(d, r.id); } else { fail(r.error || 'حصلت مشكلة، حاول تاني'); }
+    })
+    .catch(function(){ fail('حصلت مشكلة في الاتصال، حاول تاني'); });
+};
+
+function done(d, id){
+  $('f').hidden = true; $('ok').hidden = false;
+  $('oid').textContent = id;
+  var isIp = d.pay === 'إنستا باي';
+  $('pm').textContent = d.pay;
+  $('pn').textContent = VODA;
+  $('pn').hidden = isIp; $('cp').hidden = isIp;
+  $('ip').hidden = !isIp; $('ip').href = INSTA;
+  var msg = 'أنا ' + d.name + '، طلب رقم ' + id + '. حوّلت 250 جنيه عن طريق ' + d.pay + ' وده إيصال التحويل 👇';
+  $('wa').href = 'https://wa.me/' + OWNER + '?text=' + encodeURIComponent(msg);
+  $('ok').scrollIntoView({behavior:'smooth'});
+}
+
+$('cp').onclick = function(){
+  var t = $('pn').textContent, b = $('cp');
+  try { navigator.clipboard.writeText(t).then(function(){
+    b.textContent = 'تم النسخ ✓'; setTimeout(function(){ b.textContent = 'نسخ الرقم'; }, 1800);
+  }); } catch(e) {}
+};
+</script>
+</body>
+</html>
