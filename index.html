@@ -103,6 +103,12 @@ legend{font-weight:700;margin-bottom:8px}
   .tl i{right:50%;transform:translateX(50%)}
   .tl li:not(:last-child)::after{top:21px;bottom:auto;height:2px;width:calc(100% - 30px);right:calc(50% + 22px)}
 }
+/* tracking */
+.st{display:flex;gap:8px;margin:4px 0 14px}
+.st div{flex:1;text-align:center;padding:10px 4px;border-radius:12px;border:1.5px solid var(--line);color:var(--mute);font-weight:700;font-size:14px;line-height:1.5}
+.st div.on{border-color:var(--ok);background:rgba(62,207,142,.12);color:var(--ink)}
+.st div.cur{border-color:var(--gold)}
+#tid,#tl{text-align:center;direction:ltr;letter-spacing:2px}
 /* refund */
 .refund{display:flex;gap:16px;align-items:flex-start;border:2px solid var(--ok);background:rgba(62,207,142,.08);border-radius:18px;padding:24px}
 .refund .ic{font-size:36px;line-height:1.2}
@@ -120,7 +126,7 @@ legend{font-weight:700;margin-bottom:8px}
   <div>
     <h1>دولار واحد ممكن يفتحلك باب أمريكا. واحنا ندفعهولك.</h1>
     <p>قرعة الهجرة الأمريكية DV-2027 هتحتاج دفع 1 دولار إلكترونياً، ووسائل الدفع في مصر مش بتدفع بالدولار. سجّل بياناتك وسيب الباقي علينا.</p>
-    <button class="btn go" type="button">سجّل بياناتك دلوقتي</button><br>
+    <button class="btn go" type="button">سجّل بياناتك دلوقتي</button> <button class="btn ghost trk" type="button">تتبّع طلبك</button><br>
     <span class="pill">💬 بنرد على واتساب خلال ساعات</span> <span class="pill" id="cnt" hidden>✅ <b id="cn"></b> طلب اتسجل لحد دلوقتي</span>
   </div>
   <svg class="stamp" viewBox="0 0 240 240" role="img" aria-label="ختم DV-2027">
@@ -211,7 +217,7 @@ legend{font-weight:700;margin-bottom:8px}
 
   <div id="ok" class="box" hidden>
     <h3 style="color:var(--ok);margin:0 0 6px">✅ تم تسجيل طلبك</h3>
-    <p>رقم طلبك: <b id="oid" style="color:var(--ink)"></b> (احتفظ بيه)</p>
+    <p>رقم طلبك: <b id="oid" style="color:var(--ink)"></b> (احتفظ بيه، وتقدر تتابع حالته من قسم «تتبّع طلبك»)</p>
     <p>الخطوة الأخيرة: حوّل <b style="color:var(--ink)">250 جنيه</b> على <b id="pm" style="color:var(--ink)"></b></p>
     <span class="num" id="pn"></span>
     <div class="row">
@@ -220,6 +226,20 @@ legend{font-weight:700;margin-bottom:8px}
       <a class="btn" id="wa" target="_blank" rel="noopener">ابعت صورة التحويل على واتساب</a>
     </div>
     <p style="margin-top:16px">⏱ التقديم ممكن ياخد لحد يومين بسبب الضغط، وهنبعتلك إثبات التقديم على واتساب.</p>
+  </div>
+</section>
+
+<section id="track">
+  <h2>تتبّع طلبك</h2>
+  <form id="tf" class="box" novalidate>
+    <label>رقم الطلب<input id="tid" type="text" autocapitalize="characters" placeholder="DV-0007"></label>
+    <label>آخر 4 أرقام من رقم الواتساب اللي سجّلت بيه<input id="tl" type="tel" inputmode="numeric" maxlength="4" placeholder="1234"></label>
+    <p class="err" id="terr" role="alert"></p>
+    <button class="btn" id="tb" type="submit" style="width:100%">شوف حالة طلبي</button>
+  </form>
+  <div id="tr" class="box" hidden>
+    <div class="st" id="sts"></div>
+    <p id="tmsg" style="margin:0;color:var(--ink)"></p>
   </div>
 </section>
 
@@ -289,6 +309,48 @@ document.querySelectorAll('.go').forEach(function(b){
 fetch(API + '?action=stats').then(function(r){ return r.json(); }).then(function(s){
   if (s && s.count >= 10) { $('cn').textContent = s.count; $('cnt').hidden = false; }
 }).catch(function(){});
+
+document.querySelectorAll('.trk').forEach(function(b){
+  b.onclick = function(){ $('track').scrollIntoView({behavior:'smooth'}); };
+});
+
+var AR = function(t){ return t.replace(/[٠-٩]/g, function(c){ return '٠١٢٣٤٥٦٧٨٩'.indexOf(c); }); };
+$('tf').onsubmit = function(e){
+  e.preventDefault();
+  var m = AR($('tid').value.trim().toUpperCase()).match(/^(?:DV-?)?(\d{1,4})$/);
+  var l4 = AR($('tl').value.trim());
+  $('terr').textContent = ''; $('tr').hidden = true;
+  if (!m) { $('terr').textContent = 'اكتب رقم الطلب زي ما هو (مثلاً DV-0007)'; return; }
+  if (!/^\d{4}$/.test(l4)) { $('terr').textContent = 'اكتب آخر 4 أرقام من رقم الواتساب'; return; }
+  var id = 'DV-' + ('0000' + m[1]).slice(-4);
+  $('tb').disabled = true; $('tb').textContent = 'جاري البحث...';
+  fetch(API + '?action=track&id=' + encodeURIComponent(id) + '&last4=' + l4)
+    .then(function(r){ return r.json(); })
+    .then(function(r){
+      if (!r.ok) { $('terr').textContent = r.error || 'مفيش طلب بالبيانات دي'; return; }
+      showTrack(r);
+    })
+    .catch(function(){ $('terr').textContent = 'حصلت مشكلة في الاتصال، حاول تاني'; })
+    .then(function(){ $('tb').disabled = false; $('tb').textContent = 'شوف حالة طلبي'; });
+};
+function showTrack(r){
+  var cancelled = (r.payment || '').indexOf('ملغي') >= 0;
+  var stage = (r.apply || '').indexOf('تم التقديم') >= 0 ? 3 : ((r.payment || '').indexOf('تم الدفع') >= 0 ? 2 : 1);
+  var names = ['تم التسجيل', 'تم الدفع', 'تم التقديم'];
+  var msgs = {
+    1: 'طلبك مسجّل. في انتظار تحويل 250 جنيه وإرسال صورة التحويل مع رقم طلبك على واتساب.',
+    2: 'تم تأكيد الدفع، وطلبك قيد المراجعة والتقديم. ممكن ياخد لحد يومين بسبب الضغط.',
+    3: 'تم تقديم طلبك ✅ هنبعتلك إثبات التقديم على واتساب.'
+  };
+  var box = $('sts'); box.textContent = '';
+  names.forEach(function(n, i){
+    var d = document.createElement('div'); d.textContent = (i < stage ? '✓ ' : '') + n;
+    if (!cancelled && i < stage) d.className = 'on' + (i === stage - 1 ? ' cur' : '');
+    box.appendChild(d);
+  });
+  $('tmsg').textContent = cancelled ? 'الطلب ده ملغي. لو ده غلط ابعتلنا رقم طلبك على واتساب.' : msgs[stage];
+  $('tr').hidden = false;
+}
 
 $('f').onsubmit = function(e){
   e.preventDefault();
