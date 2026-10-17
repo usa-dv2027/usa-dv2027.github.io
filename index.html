@@ -8,10 +8,10 @@
 <meta name="theme-color" content="#0b1633">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ar_AR">
-<meta property="og:title" content="دولار واحد ممكن يفتحلك باب أمريكا. واحنا ندفعهولك.">
-<meta property="og:description" content="التقديم على قرعة DV-2027 بـ 250 جنيه: رقم طلب، إثبات تقديم، وضمان استرداد.">
+<meta property="og:title" content="حلمك الأمريكي يبدأ بتقديم | قرعة DV-2027">
+<meta property="og:description" content="سجّل بياناتك وسيب الباقي علينا: رقم طلب، تتبّع لحالة طلبك، وإثبات تقديم.">
 <meta property="og:url" content="https://usa-dv2027.github.io/">
-<meta property="og:image" content="https://usa-dv2027.github.io/preview.png">
+<meta property="og:image" content="https://usa-dv2027.github.io/preview-v2.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
@@ -103,6 +103,13 @@ legend{font-weight:700;margin-bottom:8px}
   .tl i{right:50%;transform:translateX(50%)}
   .tl li:not(:last-child)::after{top:21px;bottom:auto;height:2px;width:calc(100% - 30px);right:calc(50% + 22px)}
 }
+/* people / total */
+.opts3{grid-template-columns:repeat(3,1fr)}
+.opt small{display:block;font-weight:600;color:var(--mute);font-size:13px;line-height:1.5}
+.opt em{display:block;font-style:normal;font-size:12.5px;color:var(--ok);font-weight:700;line-height:1.5}
+.total{margin:10px 0 0;color:var(--ink);font-weight:700}
+.total small{display:block;color:var(--mute);font-weight:400;font-size:14px}
+.refund .rn{margin:14px 0 0;padding-top:12px;border-top:1px solid var(--line);font-size:14.5px}
 /* tracking */
 .st{display:flex;gap:8px;margin:4px 0 14px}
 .st div{flex:1;text-align:center;padding:10px 4px;border-radius:12px;border:1.5px solid var(--line);color:var(--mute);font-weight:700;font-size:14px;line-height:1.5}
@@ -155,7 +162,7 @@ legend{font-weight:700;margin-bottom:8px}
   <h2>إزاي بتتم الخدمة؟</h2>
   <ol class="tl">
     <li><i>1</i><b>سجّل بياناتك</b><span>دقيقة واحدة</span></li>
-    <li><i>2</i><b>حوّل 250 جنيه</b><span>وابعت صورة التحويل على واتساب</span></li>
+    <li><i>2</i><b>حوّل المبلغ</b><span>وابعت صورة التحويل على واتساب</span></li>
     <li><i>3</i><b>نراجع ونقدّم</b><span>لحد يومين بسبب الضغط</span></li>
     <li><i>4</i><b>إثبات التقديم</b><span>بنبعتهولك أول ما التقديم يتم</span></li>
   </ol>
@@ -186,24 +193,34 @@ legend{font-weight:700;margin-bottom:8px}
     <span class="ic">💰</span>
     <div>
       <h2>ضمان استرداد فلوسك</h2>
-      <p>لو طلبك ما اتقدمش لأي سبب من عندنا، بنرجّع لك المبلغ كامل على نفس وسيلة الدفع اللي دفعت بيها.</p>
+      <p>لو حصل سبب يمنع تقديم طلبك أو فشل التقديم، بنرجّع لك المبلغ كامل على نفس وسيلة الدفع اللي دفعت بيها.</p>
       <ul>
         <li>الاسترداد كامل من غير أي خصم.</li>
         <li>لو في خطأ في بياناتك، بنكلمك على واتساب عشان يتصحح قبل التقديم.</li>
         <li>بعد ما التقديم يتم ونبعتلك إثباته، الخدمة بتتحسب تمت.</li>
       </ul>
+      <p class="rn">ℹ️ ملحوظة: الاسترداد مش بيتم مباشرة بعد التحويل أو لمجرد تغيير الرأي، وإنما بيكون في حالة وجود سبب يمنع التقديم أو فشله.</p>
     </div>
   </div>
 </section>
 
 <section id="register">
   <h2>سجّل طلبك</h2>
-  <div class="price"><p style="margin:0">تكلفة الخدمة للفرد، شاملة رسوم الدولار</p><strong>250 جنيه</strong></div>
+  <div class="price"><p style="margin:0">تكلفة الخدمة للفرد الواحد، شاملة رسوم الدولار</p><strong>300 جنيه</strong><p style="margin:6px 0 0">قدّم مع صحابك أو عيلتك (لحد 3 أفراد في الطلب الواحد) وسعر الفرد بيقل.</p></div>
   <div class="time"><span>⏱</span><div>بسبب الضغط الكبير على الطلبات، تنفيذ التقديم ممكن ياخد <b>لحد يومين</b>. هنبعتلك إثبات التقديم أول ما يخلص.</div></div>
 
   <form id="f" class="box" novalidate>
     <label>الاسم بالكامل<input id="n" type="text" autocomplete="name" placeholder="زي ما هو في الباسبور"></label>
     <label>رقم الواتساب<input id="p" type="tel" inputmode="numeric" autocomplete="tel" placeholder="01xxxxxxxxx"></label>
+    <fieldset>
+      <legend>عدد الأفراد اللي هيقدّموا (لحد 3 في الطلب الواحد)</legend>
+      <div class="opts opts3">
+        <label class="opt"><input type="radio" name="people" value="1" checked>فرد واحد<small>300 جنيه</small></label>
+        <label class="opt"><input type="radio" name="people" value="2">فردين<small>500 جنيه</small><em>بدل 600</em></label>
+        <label class="opt"><input type="radio" name="people" value="3">3 أفراد<small>700 جنيه</small><em>بدل 900</em></label>
+      </div>
+      <p class="total" id="total"></p>
+    </fieldset>
     <fieldset>
       <legend>هتدفع عن طريق إيه؟</legend>
       <div class="opts">
@@ -218,7 +235,7 @@ legend{font-weight:700;margin-bottom:8px}
   <div id="ok" class="box" hidden>
     <h3 style="color:var(--ok);margin:0 0 6px">✅ تم تسجيل طلبك</h3>
     <p>رقم طلبك: <b id="oid" style="color:var(--ink)"></b> (احتفظ بيه، وتقدر تتابع حالته من قسم «تتبّع طلبك»)</p>
-    <p>الخطوة الأخيرة: حوّل <b style="color:var(--ink)">250 جنيه</b> على <b id="pm" style="color:var(--ink)"></b></p>
+    <p>الخطوة الأخيرة: حوّل <b id="amt" style="color:var(--ink)"></b> على <b id="pm" style="color:var(--ink)"></b></p>
     <span class="num" id="pn"></span>
     <div class="row">
       <button class="btn ghost" id="cp" type="button">نسخ الرقم</button>
@@ -249,7 +266,8 @@ legend{font-weight:700;margin-bottom:8px}
   <details><summary>إيه اللي هتطلبوه مني بعد التسجيل؟</summary><p>هنكلمك على واتساب ونطلب منك بيانات الباسبور والصورة المطلوبة للتقديم، وبنراجعهم معاك قبل ما نقدّم.</p></details>
   <details><summary>إزاي أتابع طلبي؟</summary><p>برقم طلبك على واتساب. أي استفسار ابعتلنا الرقم ونرد عليك.</p></details>
 <details><summary>لو فزت إيه اللي هيحصل؟</summary><p>نتيجة القرعة بتتعلن على الموقع الرسمي للبرنامج، وتقدر تتأكد منها ببيانات طلبك ورقم التأكيد اللي بنبعتهولك. ولو فزت، الخطوات اللي بعد كده بتكون مع الجهات الرسمية مباشرة، وتقدر تسألنا في أي سؤال.</p></details>
-  <details><summary>لو التقديم فشل؟</summary><p>لو حصلت أي مشكلة بنكلمك فوراً ونعيد المحاولة طالما الوقت لسه متاح. ولو ما قدرناش نقدّم لأي سبب من عندنا، بنرجّع فلوسك كاملة.</p></details>
+  <details><summary>لو التقديم فشل؟</summary><p>لو حصلت أي مشكلة بنكلمك فوراً ونعيد المحاولة طالما الوقت لسه متاح. ولو فشل التقديم أو حصل سبب يمنعه، بنرجّع فلوسك كاملة.</p></details>
+  <details><summary>ينفع أقدّم عن صحابي أو عيلتي؟</summary><p>أيوه، تقدر تسجّل لحد 3 أفراد في الطلب الواحد وسعر الفرد بيقل: 300 جنيه لفرد واحد، 500 لفردين، 700 لـ 3 أفراد. هنطلب منك بيانات باقي الأفراد على واتساب بعد التسجيل.</p></details>
   <details><summary>إزاي أتواصل معاكم؟</summary><p>سجّل بياناتك الأول من الفورم عشان تاخد رقم طلب، وبعدها حوّل وابعت صورة التحويل مع رقم طلبك على واتساب. وأي استفسار بعد كده ابعتلنا رقم طلبك، وبنرد خلال ساعات.</p><button type="button" class="btn faq-wa go">سجّل بياناتك</button></details>
   <p class="note">الخدمة مستقلة وغير تابعة لأي جهة حكومية. القرعة بتعتمد على الاختيار العشوائي.</p>
 </section>
@@ -338,7 +356,7 @@ function showTrack(r){
   var stage = (r.apply || '').indexOf('تم التقديم') >= 0 ? 3 : ((r.payment || '').indexOf('تم الدفع') >= 0 ? 2 : 1);
   var names = ['تم التسجيل', 'تم الدفع', 'تم التقديم'];
   var msgs = {
-    1: 'طلبك مسجّل. في انتظار تحويل 250 جنيه وإرسال صورة التحويل مع رقم طلبك على واتساب.',
+    1: 'طلبك مسجّل. في انتظار تحويل المبلغ المطلوب وإرسال صورة التحويل مع رقم طلبك على واتساب.',
     2: 'تم تأكيد الدفع، وطلبك قيد المراجعة والتقديم. ممكن ياخد لحد يومين بسبب الضغط.',
     3: 'تم تقديم طلبك ✅ هنبعتلك إثبات التقديم على واتساب.'
   };
@@ -352,10 +370,22 @@ function showTrack(r){
   $('tr').hidden = false;
 }
 
+var PRICES = {1: 300, 2: 500, 3: 700}, FULL = {1: 300, 2: 600, 3: 900};
+function curPeople(){ return +document.querySelector('input[name=people]:checked').value; }
+function updTotal(){
+  var n = curPeople(), t = $('total'); t.textContent = '';
+  t.appendChild(document.createTextNode('المبلغ المطلوب: ' + PRICES[n] + ' جنيه' + (n > 1 ? ' (وفّرت ' + (FULL[n] - PRICES[n]) + ' جنيه)' : '')));
+  var sm = document.createElement('small');
+  sm.textContent = n > 1 ? 'هنطلب منك بيانات باقي الأفراد على واتساب بعد التسجيل.' : '';
+  t.appendChild(sm);
+}
+document.querySelectorAll('input[name=people]').forEach(function(r){ r.onchange = updTotal; });
+updTotal();
+
 $('f').onsubmit = function(e){
   e.preventDefault();
   var d = { name: $('n').value.trim(), phone: $('p').value.trim(),
-            pay: document.querySelector('input[name=pay]:checked').value };
+            pay: document.querySelector('input[name=pay]:checked').value, people: curPeople() };
   $('err').textContent = '';
   if (d.name.length < 3) { $('err').textContent = 'اكتب الاسم بالكامل'; return; }
   $('sb').disabled = true; $('sb').textContent = 'جاري التسجيل...';
@@ -366,20 +396,22 @@ $('f').onsubmit = function(e){
   fetch(API, { method: 'POST', body: JSON.stringify(d) })
     .then(function(r){ return r.json(); })
     .then(function(r){
-      if (r.ok) { done(d, r.id); } else { fail(r.error || 'حصلت مشكلة، حاول تاني'); }
+      if (r.ok) { done(d, r); } else { fail(r.error || 'حصلت مشكلة، حاول تاني'); }
     })
     .catch(function(){ fail('حصلت مشكلة في الاتصال، حاول تاني'); });
 };
 
-function done(d, id){
+function done(d, r){
+  var id = r.id, amount = r.amount || PRICES[d.people];
   $('f').hidden = true; $('ok').hidden = false;
   $('oid').textContent = id;
+  $('amt').textContent = amount + ' جنيه';
   var isIp = d.pay === 'إنستا باي';
   $('pm').textContent = d.pay;
   $('pn').textContent = VODA;
   $('pn').hidden = isIp; $('cp').hidden = isIp;
   $('ip').hidden = !isIp; $('ip').href = INSTA;
-  var msg = 'أنا ' + d.name + '، طلب رقم ' + id + '. حوّلت 250 جنيه عن طريق ' + d.pay + ' وده إيصال التحويل 👇';
+  var msg = 'أنا ' + d.name + '، طلب رقم ' + id + ' (' + (d.people === 1 ? 'فرد واحد' : d.people + ' أفراد') + '). حوّلت ' + amount + ' جنيه عن طريق ' + d.pay + ' وده إيصال التحويل 👇';
   $('wa').href = 'https://wa.me/' + OWNER + '?text=' + encodeURIComponent(msg);
   $('ok').scrollIntoView({behavior:'smooth'});
 }
