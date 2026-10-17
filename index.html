@@ -105,9 +105,11 @@ legend{font-weight:700;margin-bottom:8px}
 }
 /* people / total */
 .opts3{grid-template-columns:repeat(3,1fr)}
-.opt small{display:block;font-weight:600;color:var(--mute);font-size:13px;line-height:1.5}
-.opt em{display:block;font-style:normal;font-size:12.5px;color:var(--ok);font-weight:700;line-height:1.5}
+.opt small{display:block;font-weight:800;color:var(--ok);font-size:15px;line-height:1.5}
+.opt em{display:block;font-style:normal;font-size:13px;color:var(--mute);font-weight:600;line-height:1.5;text-decoration:line-through}
 .total{margin:10px 0 0;color:var(--ink);font-weight:700}
+.tn{color:var(--ok);font-weight:900}
+.to{color:var(--mute);font-weight:600;text-decoration:line-through}
 .total small{display:block;color:var(--mute);font-weight:400;font-size:14px}
 .refund .rn{margin:14px 0 0;padding-top:12px;border-top:1px solid var(--line);font-size:14.5px}
 /* tracking */
@@ -216,8 +218,8 @@ legend{font-weight:700;margin-bottom:8px}
       <legend>عدد الأفراد اللي هيقدّموا (لحد 3 في الطلب الواحد)</legend>
       <div class="opts opts3">
         <label class="opt"><input type="radio" name="people" value="1" checked>فرد واحد<small>300 جنيه</small></label>
-        <label class="opt"><input type="radio" name="people" value="2">فردين<small>500 جنيه</small><em>بدل 600</em></label>
-        <label class="opt"><input type="radio" name="people" value="3">3 أفراد<small>700 جنيه</small><em>بدل 900</em></label>
+        <label class="opt"><input type="radio" name="people" value="2">فردين<small>500 جنيه</small><em>600 جنيه</em></label>
+        <label class="opt"><input type="radio" name="people" value="3">3 أفراد<small>700 جنيه</small><em>900 جنيه</em></label>
       </div>
       <p class="total" id="total"></p>
     </fieldset>
@@ -374,7 +376,13 @@ var PRICES = {1: 300, 2: 500, 3: 700}, FULL = {1: 300, 2: 600, 3: 900};
 function curPeople(){ return +document.querySelector('input[name=people]:checked').value; }
 function updTotal(){
   var n = curPeople(), t = $('total'); t.textContent = '';
-  t.appendChild(document.createTextNode('المبلغ المطلوب: ' + PRICES[n] + ' جنيه' + (n > 1 ? ' (وفّرت ' + (FULL[n] - PRICES[n]) + ' جنيه)' : '')));
+  t.appendChild(document.createTextNode('المبلغ المطلوب: '));
+  var a = document.createElement('span'); a.className = 'tn'; a.textContent = PRICES[n] + ' جنيه'; t.appendChild(a);
+  if (n > 1) {
+    t.appendChild(document.createTextNode(' '));
+    var o = document.createElement('s'); o.className = 'to'; o.textContent = FULL[n] + ' جنيه'; t.appendChild(o);
+    t.appendChild(document.createTextNode(' · وفّرت ' + (FULL[n] - PRICES[n]) + ' جنيه'));
+  }
   var sm = document.createElement('small');
   sm.textContent = n > 1 ? 'هنطلب منك بيانات باقي الأفراد على واتساب بعد التسجيل.' : '';
   t.appendChild(sm);
