@@ -18,8 +18,8 @@
 <base target="_top">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800;900&display=swap">
 <style>
-:root{--bg:#0b1633;--card:#14244f;--line:#2a3d73;--ink:#f4f6ff;--mute:#aab6d9;--red:#ef4b42;--gold:#f6c04e;--ok:#3ecf8e}
-@media (prefers-color-scheme:light){:root{--bg:#f2f5ff;--card:#fff;--line:#d5dcf2;--ink:#0b1633;--mute:#4a5788;--gold:#b87a00;--ok:#0f9d63}}
+:root{--bg:#0b1633;--card:#14244f;--line:#2a3d73;--ink:#f4f6ff;--mute:#aab6d9;--red:#ef4b42;--gold:#f6c04e;--ok:#3ecf8e;--usd:#5ab0ff}
+@media (prefers-color-scheme:light){:root{--bg:#f2f5ff;--card:#fff;--line:#d5dcf2;--ink:#0b1633;--mute:#4a5788;--gold:#b87a00;--ok:#0f9d63;--usd:#1769c2}}
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:'Cairo',Tahoma,Arial,sans-serif;line-height:1.8;font-size:17px}
@@ -114,6 +114,17 @@ legend{font-weight:700;margin-bottom:8px}
 .refund .rn{margin:14px 0 0;padding-top:12px;border-top:1px solid var(--line);font-size:14.5px}
 .hint{font-size:14px;color:var(--mute);margin:-6px 0 14px;line-height:1.7}
 #payHint{margin:10px 0 0}
+.pr2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.pr2>div{border-radius:14px;padding:12px 6px;border:1px solid var(--gold)}
+.pr2 .usd{border-color:var(--usd);background:rgba(90,176,255,.10)}
+.pr2 .pl{display:block;color:var(--ink);font-weight:700;font-size:15px}
+.pr2 strong{font-size:clamp(26px,7vw,42px)}
+.pr2 .usd strong{color:var(--usd)}
+.crypto{margin:8px 0 14px}
+.addr{display:block;direction:ltr;text-align:left;font-family:ui-monospace,Consolas,monospace;font-size:14.5px;line-height:1.6;word-break:break-all;background:var(--bg);border:1.5px solid var(--usd);border-radius:12px;padding:12px 14px;margin:10px 0;color:var(--ink)}
+.warn{margin:0;padding:12px 14px;border:1px solid var(--gold);background:rgba(246,192,78,.12);border-radius:12px;color:var(--ink);font-size:15px}
+.again{margin-top:18px;padding-top:16px;border-top:1px solid var(--line);text-align:center}
+.again p{font-size:14px;margin:10px 0 0}
 /* tracking */
 .st{display:flex;gap:8px;margin:4px 0 14px}
 .st div{flex:1;text-align:center;padding:10px 4px;border-radius:12px;border:1.5px solid var(--line);color:var(--mute);font-weight:700;font-size:14px;line-height:1.5}
@@ -210,7 +221,14 @@ legend{font-weight:700;margin-bottom:8px}
 
 <section id="register">
   <h2>سجّل طلبك</h2>
-  <div class="price"><p style="margin:0">تكلفة الخدمة للفرد الواحد، شاملة رسوم الدولار</p><strong>300 جنيه</strong><p style="margin:0">للمقيمين في مصر، و10 دولار للمقيمين خارج مصر</p><p style="margin:6px 0 0">قدّم مع صحابك أو عيلتك (لحد 3 أفراد في الطلب الواحد) وسعر الفرد بيقل.</p></div>
+  <div class="price">
+    <p style="margin:0 0 10px">تكلفة الخدمة للفرد الواحد، شاملة رسوم الدولار</p>
+    <div class="pr2">
+      <div><span class="pl">🇪🇬 مقيم في مصر</span><strong>300 جنيه</strong></div>
+      <div class="usd"><span class="pl">🌍 مقيم خارج مصر</span><strong>10 دولار</strong></div>
+    </div>
+    <p style="margin:12px 0 0">قدّم مع صحابك أو عيلتك (لحد 3 أفراد في الطلب الواحد) وسعر الفرد بيقل.</p>
+  </div>
   <div class="time"><span>⏱</span><div>بسبب الضغط الكبير على الطلبات، تنفيذ التقديم ممكن ياخد <b>لحد يومين</b>. هنبعتلك إثبات التقديم أول ما يخلص.</div></div>
 
   <form id="f" class="box" novalidate>
@@ -243,14 +261,24 @@ legend{font-weight:700;margin-bottom:8px}
     <p>رقم طلبك: <b id="oid" style="color:var(--ink)"></b> (احتفظ بيه، وتقدر تتابع حالته من قسم «تتبّع طلبك»)</p>
     <p>الخطوة الأخيرة: حوّل <b id="amt" style="color:var(--ink)"></b> على <b id="pm" style="color:var(--ink)"></b></p>
     <span class="num" id="pn"></span>
+    <div id="cry" class="crypto" hidden>
+      <p style="margin:0">العملة: <b>USDC</b> · الشبكة: <b>Solana</b></p>
+      <span class="addr" id="addr"></span>
+      <p class="warn">⚠️ ابعت USDC على شبكة Solana بس. لو بعت على شبكة تانية (زي Ethereum) الفلوس هتضيع ومش هنقدر نرجّعها. راجع العنوان كويس قبل ما تبعت، ولو بتبعت من منصة تداول اتأكد إن المبلغ اللي هيوصل بعد رسوم السحب هو المبلغ المطلوب.</p>
+    </div>
     <div class="row">
       <button class="btn ghost" id="cp" type="button">نسخ الرقم</button>
+      <button class="btn ghost" id="cpa" type="button" hidden>نسخ العنوان</button>
       <a class="btn" id="ip" target="_blank" rel="noopener" hidden>افتح إنستا باي وادفع</a>
       <a class="btn" id="pp" target="_blank" rel="noopener" hidden>ادفع عبر PayPal</a>
       <a class="btn" id="wa" target="_blank" rel="noopener">ابعت صورة التحويل على واتساب</a>
     </div>
-    <p id="ppnote" hidden style="margin-top:16px">لو واجهتك أي مشكلة في الدفع عن طريق PayPal، راسلنا على واتساب ونحاول نوفرلك وسيلة دفع تانية متاحة في بلدك.</p>
+    <p id="ppnote" hidden style="margin-top:16px">لو واجهتك أي مشكلة في الدفع، راسلنا على واتساب ونحاول نوفرلك وسيلة دفع تانية متاحة في بلدك.</p>
     <p style="margin-top:16px">⏱ التقديم ممكن ياخد لحد يومين بسبب الضغط، وهنبعتلك إثبات التقديم على واتساب.</p>
+    <div class="again">
+      <button class="btn ghost" id="again" type="button">+ سجّل طلب جديد</button>
+      <p>لو عايز تسجّل طلب تاني (لشخص أو مجموعة جديدة). الطلب السابق بيفضل مسجّل، ولو عايز تلغيه ابعتلنا رقمه على واتساب.</p>
+    </div>
   </div>
 </section>
 
@@ -276,7 +304,7 @@ legend{font-weight:700;margin-bottom:8px}
 <details><summary>لو فزت إيه اللي هيحصل؟</summary><p>نتيجة القرعة بتتعلن على الموقع الرسمي للبرنامج، وتقدر تتأكد منها ببيانات طلبك ورقم التأكيد اللي بنبعتهولك. ولو فزت، الخطوات اللي بعد كده بتكون مع الجهات الرسمية مباشرة، وتقدر تسألنا في أي سؤال.</p></details>
   <details><summary>لو التقديم فشل؟</summary><p>لو حصلت أي مشكلة بنكلمك فوراً ونعيد المحاولة طالما الوقت لسه متاح. ولو فشل التقديم أو حصل سبب يمنعه، بنرجّع فلوسك كاملة.</p></details>
   <details><summary>ينفع أقدّم عن صحابي أو عيلتي؟</summary><p>أيوه، تقدر تسجّل لحد 3 أفراد في الطلب الواحد وسعر الفرد بيقل. في مصر: 300 جنيه لفرد واحد، 500 لفردين، 700 لـ 3 أفراد. وخارج مصر: 10 دولار لفرد واحد، 15 لفردين، 20 لـ 3 أفراد. هنطلب منك بيانات باقي الأفراد على واتساب بعد التسجيل.</p></details>
-  <details><summary>أنا برا مصر، أدفع إزاي؟</summary><p>اختار «خارج مصر» في التسجيل وهتدفع عن طريق PayPal. ولو واجهتك أي مشكلة في الدفع، راسلنا على واتساب ونحاول نوفرلك وسيلة دفع تانية متاحة في بلدك.</p></details>
+  <details><summary>أنا برا مصر، أدفع إزاي؟</summary><p>اختار «خارج مصر» في التسجيل وهتدفع عن طريق PayPal أو بعملة USDC على شبكة Solana. ولو واجهتك أي مشكلة في الدفع، راسلنا على واتساب ونحاول نوفرلك وسيلة دفع تانية متاحة في بلدك.</p></details>
   <details><summary>إزاي أتواصل معاكم؟</summary><p>سجّل بياناتك الأول من الفورم عشان تاخد رقم طلب، وبعدها حوّل وابعت صورة التحويل مع رقم طلبك على واتساب. وأي استفسار بعد كده ابعتلنا رقم طلبك، وبنرد خلال ساعات.</p><button type="button" class="btn faq-wa go">سجّل بياناتك</button></details>
   <p class="note">الخدمة مستقلة وغير تابعة لأي جهة حكومية. القرعة بتعتمد على الاختيار العشوائي.</p>
 </section>
@@ -288,6 +316,7 @@ var OWNER = '201098797348';
 var API = 'https://script.google.com/macros/s/AKfycbzg5RzvP7E4R6Aks0qlsRLB7NTQ0iOVS5t1Ym1jD0WkaG306nRE8L9nmh2ejirz5J7v/exec';
 var VODA = '01098797348';
 var INSTA = 'https://ipn.eg/S/mohammedrx/instapay/48tPjx';
+var SOL = '2H1kws3mrETfaxvd53p876sdZg62sQNpEzYf1VmkdPNb';
 var $ = function(i){return document.getElementById(i)};
 var U = function(id){return 'https://unsplash.com/photos/'+id+'/download?force=true&w=1200'};
 
@@ -381,7 +410,7 @@ function showTrack(r){
 
 var CFG = {
   eg:   {cur: 'جنيه', prices: {1: 300, 2: 500, 3: 700}, full: {1: 300, 2: 600, 3: 900}, pays: ['فودافون كاش', 'إنستا باي'], ph: '01xxxxxxxxx'},
-  intl: {cur: 'دولار', prices: {1: 10, 2: 15, 3: 20}, full: {1: 10, 2: 20, 3: 30}, pays: ['PayPal'], ph: '971501234567'}
+  intl: {cur: 'دولار', prices: {1: 10, 2: 15, 3: 20}, full: {1: 10, 2: 20, 3: 30}, pays: ['PayPal', 'USDC (Solana)'], ph: '971501234567'}
 };
 function curRegion(){ return document.querySelector('input[name=region]:checked').value; }
 function curPeople(){ var c = document.querySelector('input[name=people]:checked'); return c ? +c.value : 1; }
@@ -417,7 +446,7 @@ function render(){
   var pa = $('payOpts'); pa.textContent = '';
   c.pays.forEach(function(p, i){ pa.appendChild(mkOpt('pay', p, i === 0, p)); });
   pa.style.gridTemplateColumns = c.pays.length === 1 ? '1fr' : '';
-  $('payHint').textContent = intl ? 'لو واجهتك أي مشكلة في الدفع عن طريق PayPal، راسلنا على واتساب ونحاول نوفرلك وسيلة دفع تانية متاحة في بلدك.' : '';
+  $('payHint').textContent = intl ? 'لو واجهتك أي مشكلة في الدفع، راسلنا على واتساب ونحاول نوفرلك وسيلة دفع تانية متاحة في بلدك.' : '';
   $('payHint').hidden = !intl;
   $('phHint').hidden = !intl;
   $('p').placeholder = c.ph;
@@ -447,26 +476,42 @@ $('f').onsubmit = function(e){
 
 function done(d, r){
   var id = r.id, cur = r.currency || CFG[d.region].cur, amount = r.amount || CFG[d.region].prices[d.people];
+  var isV = d.pay === 'فودافون كاش', isIp = d.pay === 'إنستا باي', isPp = d.pay === 'PayPal', isC = d.pay === 'USDC (Solana)';
+  var amtTxt = isC ? amount + ' USDC' : amount + ' ' + cur;
   $('f').hidden = true; $('ok').hidden = false;
   $('oid').textContent = id;
-  $('amt').textContent = amount + ' ' + cur;
-  var isV = d.pay === 'فودافون كاش', isIp = d.pay === 'إنستا باي', isPp = d.pay === 'PayPal';
-  $('pm').textContent = d.pay;
+  $('amt').textContent = amtTxt;
+  $('pm').textContent = isC ? 'محفظة Solana' : d.pay;
   $('pn').textContent = VODA;
   $('pn').hidden = !isV; $('cp').hidden = !isV;
   $('ip').hidden = !isIp; $('ip').href = INSTA;
   $('pp').hidden = !isPp; $('pp').href = 'https://paypal.me/medomar12/' + amount + 'USD';
-  $('ppnote').hidden = !isPp;
-  var msg = 'أنا ' + d.name + '، طلب رقم ' + id + ' (' + (d.people === 1 ? 'فرد واحد' : d.people + ' أفراد') + '). حوّلت ' + amount + ' ' + cur + ' عن طريق ' + d.pay + ' وده إيصال التحويل 👇';
+  $('cry').hidden = !isC; $('cpa').hidden = !isC; $('addr').textContent = SOL;
+  $('ppnote').hidden = d.region !== 'intl';
+  var msg = 'أنا ' + d.name + '، طلب رقم ' + id + ' (' + (d.people === 1 ? 'فرد واحد' : d.people + ' أفراد') + '). حوّلت ' + amtTxt + ' عن طريق ' + d.pay + ' وده إيصال التحويل 👇';
   $('wa').href = 'https://wa.me/' + OWNER + '?text=' + encodeURIComponent(msg);
   $('ok').scrollIntoView({behavior:'smooth'});
 }
 
-$('cp').onclick = function(){
-  var t = $('pn').textContent, b = $('cp');
-  try { navigator.clipboard.writeText(t).then(function(){
-    b.textContent = 'تم النسخ ✓'; setTimeout(function(){ b.textContent = 'نسخ الرقم'; }, 1800);
-  }); } catch(e) {}
+function bindCopy(btn, getText, label){
+  btn.onclick = function(){
+    try { navigator.clipboard.writeText(getText()).then(function(){
+      btn.textContent = 'تم النسخ ✓'; setTimeout(function(){ btn.textContent = label; }, 1800);
+    }); } catch(e) {}
+  };
+}
+bindCopy($('cp'), function(){ return $('pn').textContent; }, 'نسخ الرقم');
+bindCopy($('cpa'), function(){ return $('addr').textContent; }, 'نسخ العنوان');
+
+$('again').onclick = function(){
+  var rg = curRegion();
+  $('f').reset();
+  document.querySelector('input[name=region][value=' + rg + ']').checked = true;
+  render();
+  $('err').textContent = '';
+  $('sb').disabled = false; $('sb').textContent = 'أكّد طلبي';
+  $('ok').hidden = true; $('f').hidden = false;
+  $('f').scrollIntoView({behavior:'smooth'});
 };
 </script>
 </body>
