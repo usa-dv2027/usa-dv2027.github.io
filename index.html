@@ -112,6 +112,8 @@ legend{font-weight:700;margin-bottom:8px}
 .to{color:var(--mute);font-weight:600;text-decoration:line-through}
 .total small{display:block;color:var(--mute);font-weight:400;font-size:14px}
 .refund .rn{margin:14px 0 0;padding-top:12px;border-top:1px solid var(--line);font-size:14.5px}
+.hint{font-size:14px;color:var(--mute);margin:-6px 0 14px;line-height:1.7}
+#payHint{margin:10px 0 0}
 /* tracking */
 .st{display:flex;gap:8px;margin:4px 0 14px}
 .st div{flex:1;text-align:center;padding:10px 4px;border-radius:12px;border:1.5px solid var(--line);color:var(--mute);font-weight:700;font-size:14px;line-height:1.5}
@@ -208,27 +210,29 @@ legend{font-weight:700;margin-bottom:8px}
 
 <section id="register">
   <h2>سجّل طلبك</h2>
-  <div class="price"><p style="margin:0">تكلفة الخدمة للفرد الواحد، شاملة رسوم الدولار</p><strong>300 جنيه</strong><p style="margin:6px 0 0">قدّم مع صحابك أو عيلتك (لحد 3 أفراد في الطلب الواحد) وسعر الفرد بيقل.</p></div>
+  <div class="price"><p style="margin:0">تكلفة الخدمة للفرد الواحد، شاملة رسوم الدولار</p><strong>300 جنيه</strong><p style="margin:0">للمقيمين في مصر، و10 دولار للمقيمين خارج مصر</p><p style="margin:6px 0 0">قدّم مع صحابك أو عيلتك (لحد 3 أفراد في الطلب الواحد) وسعر الفرد بيقل.</p></div>
   <div class="time"><span>⏱</span><div>بسبب الضغط الكبير على الطلبات، تنفيذ التقديم ممكن ياخد <b>لحد يومين</b>. هنبعتلك إثبات التقديم أول ما يخلص.</div></div>
 
   <form id="f" class="box" novalidate>
+    <fieldset>
+      <legend>أنت مقيم في؟</legend>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="region" value="eg" checked>🇪🇬 مصر</label>
+        <label class="opt"><input type="radio" name="region" value="intl">🌍 خارج مصر</label>
+      </div>
+    </fieldset>
     <label>الاسم بالكامل<input id="n" type="text" autocomplete="name" placeholder="زي ما هو في الباسبور"></label>
     <label>رقم الواتساب<input id="p" type="tel" inputmode="numeric" autocomplete="tel" placeholder="01xxxxxxxxx"></label>
+    <p class="hint" id="phHint" hidden>اكتب الرقم بالكود الدولي من غير + أو أصفار، مثلاً 971501234567</p>
     <fieldset>
       <legend>عدد الأفراد اللي هيقدّموا (لحد 3 في الطلب الواحد)</legend>
-      <div class="opts opts3">
-        <label class="opt"><input type="radio" name="people" value="1" checked>فرد واحد<small>300 جنيه</small></label>
-        <label class="opt"><input type="radio" name="people" value="2">فردين<small>500 جنيه</small><em>600 جنيه</em></label>
-        <label class="opt"><input type="radio" name="people" value="3">3 أفراد<small>700 جنيه</small><em>900 جنيه</em></label>
-      </div>
+      <div class="opts opts3" id="peopleOpts"></div>
       <p class="total" id="total"></p>
     </fieldset>
     <fieldset>
       <legend>هتدفع عن طريق إيه؟</legend>
-      <div class="opts">
-        <label class="opt"><input type="radio" name="pay" value="فودافون كاش" checked>فودافون كاش</label>
-        <label class="opt"><input type="radio" name="pay" value="إنستا باي">إنستا باي</label>
-      </div>
+      <div class="opts" id="payOpts"></div>
+      <p class="hint" id="payHint" hidden></p>
     </fieldset>
     <p class="err" id="err" role="alert"></p>
     <button class="btn" id="sb" type="submit" style="width:100%">أكّد طلبي</button>
@@ -242,8 +246,10 @@ legend{font-weight:700;margin-bottom:8px}
     <div class="row">
       <button class="btn ghost" id="cp" type="button">نسخ الرقم</button>
       <a class="btn" id="ip" target="_blank" rel="noopener" hidden>افتح إنستا باي وادفع</a>
+      <a class="btn" id="pp" target="_blank" rel="noopener" hidden>ادفع عبر PayPal</a>
       <a class="btn" id="wa" target="_blank" rel="noopener">ابعت صورة التحويل على واتساب</a>
     </div>
+    <p id="ppnote" hidden style="margin-top:16px">لو واجهتك أي مشكلة في الدفع عن طريق PayPal، راسلنا على واتساب ونحاول نوفرلك وسيلة دفع تانية متاحة في بلدك.</p>
     <p style="margin-top:16px">⏱ التقديم ممكن ياخد لحد يومين بسبب الضغط، وهنبعتلك إثبات التقديم على واتساب.</p>
   </div>
 </section>
@@ -269,7 +275,8 @@ legend{font-weight:700;margin-bottom:8px}
   <details><summary>إزاي أتابع طلبي؟</summary><p>برقم طلبك على واتساب. أي استفسار ابعتلنا الرقم ونرد عليك.</p></details>
 <details><summary>لو فزت إيه اللي هيحصل؟</summary><p>نتيجة القرعة بتتعلن على الموقع الرسمي للبرنامج، وتقدر تتأكد منها ببيانات طلبك ورقم التأكيد اللي بنبعتهولك. ولو فزت، الخطوات اللي بعد كده بتكون مع الجهات الرسمية مباشرة، وتقدر تسألنا في أي سؤال.</p></details>
   <details><summary>لو التقديم فشل؟</summary><p>لو حصلت أي مشكلة بنكلمك فوراً ونعيد المحاولة طالما الوقت لسه متاح. ولو فشل التقديم أو حصل سبب يمنعه، بنرجّع فلوسك كاملة.</p></details>
-  <details><summary>ينفع أقدّم عن صحابي أو عيلتي؟</summary><p>أيوه، تقدر تسجّل لحد 3 أفراد في الطلب الواحد وسعر الفرد بيقل: 300 جنيه لفرد واحد، 500 لفردين، 700 لـ 3 أفراد. هنطلب منك بيانات باقي الأفراد على واتساب بعد التسجيل.</p></details>
+  <details><summary>ينفع أقدّم عن صحابي أو عيلتي؟</summary><p>أيوه، تقدر تسجّل لحد 3 أفراد في الطلب الواحد وسعر الفرد بيقل. في مصر: 300 جنيه لفرد واحد، 500 لفردين، 700 لـ 3 أفراد. وخارج مصر: 10 دولار لفرد واحد، 15 لفردين، 20 لـ 3 أفراد. هنطلب منك بيانات باقي الأفراد على واتساب بعد التسجيل.</p></details>
+  <details><summary>أنا برا مصر، أدفع إزاي؟</summary><p>اختار «خارج مصر» في التسجيل وهتدفع عن طريق PayPal. ولو واجهتك أي مشكلة في الدفع، راسلنا على واتساب ونحاول نوفرلك وسيلة دفع تانية متاحة في بلدك.</p></details>
   <details><summary>إزاي أتواصل معاكم؟</summary><p>سجّل بياناتك الأول من الفورم عشان تاخد رقم طلب، وبعدها حوّل وابعت صورة التحويل مع رقم طلبك على واتساب. وأي استفسار بعد كده ابعتلنا رقم طلبك، وبنرد خلال ساعات.</p><button type="button" class="btn faq-wa go">سجّل بياناتك</button></details>
   <p class="note">الخدمة مستقلة وغير تابعة لأي جهة حكومية. القرعة بتعتمد على الاختيار العشوائي.</p>
 </section>
@@ -372,28 +379,57 @@ function showTrack(r){
   $('tr').hidden = false;
 }
 
-var PRICES = {1: 300, 2: 500, 3: 700}, FULL = {1: 300, 2: 600, 3: 900};
-function curPeople(){ return +document.querySelector('input[name=people]:checked').value; }
+var CFG = {
+  eg:   {cur: 'جنيه', prices: {1: 300, 2: 500, 3: 700}, full: {1: 300, 2: 600, 3: 900}, pays: ['فودافون كاش', 'إنستا باي'], ph: '01xxxxxxxxx'},
+  intl: {cur: 'دولار', prices: {1: 10, 2: 15, 3: 20}, full: {1: 10, 2: 20, 3: 30}, pays: ['PayPal'], ph: '971501234567'}
+};
+function curRegion(){ return document.querySelector('input[name=region]:checked').value; }
+function curPeople(){ var c = document.querySelector('input[name=people]:checked'); return c ? +c.value : 1; }
+function mkOpt(name, value, checked, label, price, old){
+  var l = document.createElement('label'); l.className = 'opt';
+  var i = document.createElement('input'); i.type = 'radio'; i.name = name; i.value = value; i.checked = checked;
+  l.appendChild(i); l.appendChild(document.createTextNode(label));
+  if (price) { var sm = document.createElement('small'); sm.textContent = price; l.appendChild(sm); }
+  if (old) { var em = document.createElement('em'); em.textContent = old; l.appendChild(em); }
+  return l;
+}
 function updTotal(){
-  var n = curPeople(), t = $('total'); t.textContent = '';
+  var c = CFG[curRegion()], n = curPeople(), t = $('total'); t.textContent = '';
   t.appendChild(document.createTextNode('المبلغ المطلوب: '));
-  var a = document.createElement('span'); a.className = 'tn'; a.textContent = PRICES[n] + ' جنيه'; t.appendChild(a);
+  var a = document.createElement('span'); a.className = 'tn'; a.textContent = c.prices[n] + ' ' + c.cur; t.appendChild(a);
   if (n > 1) {
     t.appendChild(document.createTextNode(' '));
-    var o = document.createElement('s'); o.className = 'to'; o.textContent = FULL[n] + ' جنيه'; t.appendChild(o);
-    t.appendChild(document.createTextNode(' · وفّرت ' + (FULL[n] - PRICES[n]) + ' جنيه'));
+    var o = document.createElement('s'); o.className = 'to'; o.textContent = c.full[n] + ' ' + c.cur; t.appendChild(o);
+    t.appendChild(document.createTextNode(' · وفّرت ' + (c.full[n] - c.prices[n]) + ' ' + c.cur));
   }
   var sm = document.createElement('small');
   sm.textContent = n > 1 ? 'هنطلب منك بيانات باقي الأفراد على واتساب بعد التسجيل.' : '';
   t.appendChild(sm);
 }
-document.querySelectorAll('input[name=people]').forEach(function(r){ r.onchange = updTotal; });
-updTotal();
+function render(){
+  var intl = curRegion() === 'intl', c = CFG[curRegion()], keep = curPeople();
+  var po = $('peopleOpts'); po.textContent = '';
+  [[1, 'فرد واحد'], [2, 'فردين'], [3, '3 أفراد']].forEach(function(x){
+    var n = x[0];
+    var l = mkOpt('people', n, n === keep, x[1], c.prices[n] + ' ' + c.cur, n > 1 ? c.full[n] + ' ' + c.cur : '');
+    l.firstChild.onchange = updTotal; po.appendChild(l);
+  });
+  var pa = $('payOpts'); pa.textContent = '';
+  c.pays.forEach(function(p, i){ pa.appendChild(mkOpt('pay', p, i === 0, p)); });
+  pa.style.gridTemplateColumns = c.pays.length === 1 ? '1fr' : '';
+  $('payHint').textContent = intl ? 'لو واجهتك أي مشكلة في الدفع عن طريق PayPal، راسلنا على واتساب ونحاول نوفرلك وسيلة دفع تانية متاحة في بلدك.' : '';
+  $('payHint').hidden = !intl;
+  $('phHint').hidden = !intl;
+  $('p').placeholder = c.ph;
+  updTotal();
+}
+document.querySelectorAll('input[name=region]').forEach(function(r){ r.onchange = render; });
+render();
 
 $('f').onsubmit = function(e){
   e.preventDefault();
   var d = { name: $('n').value.trim(), phone: $('p').value.trim(),
-            pay: document.querySelector('input[name=pay]:checked').value, people: curPeople() };
+            pay: document.querySelector('input[name=pay]:checked').value, people: curPeople(), region: curRegion() };
   $('err').textContent = '';
   if (d.name.length < 3) { $('err').textContent = 'اكتب الاسم بالكامل'; return; }
   $('sb').disabled = true; $('sb').textContent = 'جاري التسجيل...';
@@ -410,16 +446,18 @@ $('f').onsubmit = function(e){
 };
 
 function done(d, r){
-  var id = r.id, amount = r.amount || PRICES[d.people];
+  var id = r.id, cur = r.currency || CFG[d.region].cur, amount = r.amount || CFG[d.region].prices[d.people];
   $('f').hidden = true; $('ok').hidden = false;
   $('oid').textContent = id;
-  $('amt').textContent = amount + ' جنيه';
-  var isIp = d.pay === 'إنستا باي';
+  $('amt').textContent = amount + ' ' + cur;
+  var isV = d.pay === 'فودافون كاش', isIp = d.pay === 'إنستا باي', isPp = d.pay === 'PayPal';
   $('pm').textContent = d.pay;
   $('pn').textContent = VODA;
-  $('pn').hidden = isIp; $('cp').hidden = isIp;
+  $('pn').hidden = !isV; $('cp').hidden = !isV;
   $('ip').hidden = !isIp; $('ip').href = INSTA;
-  var msg = 'أنا ' + d.name + '، طلب رقم ' + id + ' (' + (d.people === 1 ? 'فرد واحد' : d.people + ' أفراد') + '). حوّلت ' + amount + ' جنيه عن طريق ' + d.pay + ' وده إيصال التحويل 👇';
+  $('pp').hidden = !isPp; $('pp').href = 'https://paypal.me/medomar12/' + amount + 'USD';
+  $('ppnote').hidden = !isPp;
+  var msg = 'أنا ' + d.name + '، طلب رقم ' + id + ' (' + (d.people === 1 ? 'فرد واحد' : d.people + ' أفراد') + '). حوّلت ' + amount + ' ' + cur + ' عن طريق ' + d.pay + ' وده إيصال التحويل 👇';
   $('wa').href = 'https://wa.me/' + OWNER + '?text=' + encodeURIComponent(msg);
   $('ok').scrollIntoView({behavior:'smooth'});
 }
