@@ -125,6 +125,13 @@ legend{font-weight:700;margin-bottom:8px}
 .warn{margin:0;padding:12px 14px;border:1px solid var(--gold);background:rgba(246,192,78,.12);border-radius:12px;color:var(--ink);font-size:15px}
 .again{margin-top:18px;padding-top:16px;border-top:1px solid var(--line);text-align:center}
 .again p{font-size:14px;margin:10px 0 0}
+/* problems & solutions */
+.pg{display:grid;gap:14px}
+@media(min-width:760px){.pg{grid-template-columns:1fr 1fr}.pg .pq:last-child:nth-child(odd){grid-column:1/-1}}
+.pq p{margin:0}
+.pq .q{color:var(--ink);font-weight:800;margin-bottom:10px;line-height:1.7}
+.pq .q::before{content:"😓 المشكلة: ";color:var(--red)}
+.pq .a::before{content:"✅ الحل: ";color:var(--ok);font-weight:800}
 /* tracking */
 .st{display:flex;gap:8px;margin:4px 0 14px}
 .st div{flex:1;text-align:center;padding:10px 4px;border-radius:12px;border:1.5px solid var(--line);color:var(--mute);font-weight:700;font-size:14px;line-height:1.5}
@@ -147,7 +154,7 @@ legend{font-weight:700;margin-bottom:8px}
 <section class="hero">
   <div>
     <h1>دولار واحد ممكن يفتحلك باب أمريكا. واحنا ندفعهولك.</h1>
-    <p>قرعة الهجرة الأمريكية DV-2027 هتحتاج دفع 1 دولار إلكترونياً، ووسائل الدفع في مصر مش بتدفع بالدولار. سجّل بياناتك وسيب الباقي علينا.</p>
+    <p>قرعة الهجرة الأمريكية DV-2027 محتاجة بيانات دقيقة ودفع رسوم إلكتروني، وأي غلطة بسيطة ممكن تضيّع الفرصة. سجّل بياناتك وسيب الباقي علينا.</p>
     <button class="btn go" type="button">سجّل بياناتك دلوقتي</button> <button class="btn ghost trk" type="button">تتبّع طلبك</button><br>
     <span class="pill">💬 بنرد على واتساب خلال ساعات</span> <span class="pill" id="cnt" hidden>✅ <b id="cn"></b> طلب اتسجل لحد دلوقتي</span>
   </div>
@@ -167,9 +174,28 @@ legend{font-weight:700;margin-bottom:8px}
 </section>
 
 <section>
-  <div class="two">
-    <div class="box bad"><h3>المشكلة</h3><p>التقديم هيتطلب دفع 1 دولار أونلاين. كروت مصر العادية مش بتقبل الدفع بالدولار، وناس كتير بتضيع الفرصة بسبب دولار واحد.</p></div>
-    <div class="box good"><h3>الحل</h3><p>احنا بنراجع بياناتك، وندفع الرسوم بكارت دولار أمريكي، ونقدّم طلبك، ونتابع معاك لحد ما التقديم يخلص.</p></div>
+  <h2>مشاكل بتواجه أي حد بيقدّم… وحلها عندنا</h2>
+  <div class="pg">
+    <div class="box pq">
+      <p class="q">غلطة صغيرة في الاسم أو التاريخ ممكن تضيّع الطلب.</p>
+      <p class="a">بنراجع بياناتك معاك على الباسبور قبل ما نقدّم، وبنكلمك لو في أي حاجة محتاجة تتصحح.</p>
+    </div>
+    <div class="box pq">
+      <p class="q">الموقع الرسمي بالإنجليزي والخطوات مش واضحة.</p>
+      <p class="a">بنقدّم الطلب عنك ونتابع معاك خطوة بخطوة لحد ما التقديم يخلص.</p>
+    </div>
+    <div class="box pq">
+      <p class="q">الدفع الإلكتروني مش دايماً سهل.</p>
+      <p class="a">بنوفرلك وسيلة دفع تناسبك: فودافون كاش أو إنستا باي في مصر، وPayPal أو USDC خارج مصر. ورسوم التقديم الرسمية علينا.</p>
+    </div>
+    <div class="box pq">
+      <p class="q">خايف من النصب، ومش عارف طلبي وصل فين.</p>
+      <p class="a">كل طلب ليه رقم وبتتابعه من قسم «تتبّع طلبك»، وبنبعتلك إثبات التقديم، وعندك ضمان استرداد في حالة المنع أو الفشل.</p>
+    </div>
+    <div class="box pq">
+      <p class="q">عايز أقدّم معايا عيلتي أو صحابي.</p>
+      <p class="a">ينفع لحد 3 أفراد في الطلب الواحد، وسعر الفرد بيقل.</p>
+    </div>
   </div>
 </section>
 
